@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <script src='jquery.js' type='text/javascript' charset='utf-8'></script>
+    <script src='raphael.js' type='text/javascript' charset='utf-8'></script>
+    
+    <script src='../raphael.implements55.js' type='text/javascript' charset='utf-8'></script>
+    <script src='../raphael.sketchPad55.js' type='text/javascript' charset='utf-8'></script>
+  </head>
+  <body style='margin: 0; padding: 0'>
+    <div style='position: absolute; z-index: 50; top: 50px; left: 100px; width: 500px; background: #AAA; padding: 0 20px; opacity: 0.95;'>
+      <h2>
+        sketch pad jQuery plugin for Raphael
+      </h2>
+      
+      <p>
+        this is a jQuery plugin i wrote to regenerate a sketch on an interval you set. it will add a handy control so that you can pause it.
+      </p>
+
+      <p>
+        contain your sketch in a javascript function that takes a paper element.
+      </p>
+      <pre>
+        var functionThatDraws = function(paper) {
+          for(var i = 0; i < 500; i+=40) {
+            for(var j = 0; j < 500; j+=40) {
+              var width = Math.random()*20,
+                height = Math.random()*20;
+              paper.ellipse(i,j, width, height).
+                attr('fill', 'red');
+            }
+          }
+        };
+      </pre>
+      <p>
+        pick your sketchpad element (only one-per-page, sorry). choose an interval and put it together.
+      </p>
+      <pre>
+        $('#container').sketchPad55(functionThatDraws, 1000);
+      </pre>
+      <p>
+        check the source of this page for an example.
+      </p>
+      <p>
+        check the source of raphael.sketchPad55.js for the options. ie: {noControl: true}
+      </p>
+    </div>
+    
+    <script type="text/javascript" charset="utf-8">
+      var drawFunction = function(paper) {
+        var drawFunctionForDoToGrid = function() {
+          var circle = paper.rect(Ext55.random(10)+10,Ext55.random(10)+10,Ext55.random(10)+10,Ext55.random(10)+30).attr({stroke: Raphael.randomGrey(),"stroke-width": 3});
+          return paper.radialRepeater(0,0,Ext55.random(20)+10,4+Ext55.random(4), circle, {});
+        };
+        var shape = paper.doToGrid(drawFunctionForDoToGrid, 100+Raphael.randomize(100), 100+Raphael.randomize(100));
+      };
+
+
+      $('body').sketchPad55(drawFunction, 1000);
+    </script>
+  </body>
+</html>

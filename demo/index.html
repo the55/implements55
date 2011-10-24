@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <script src='jquery.js' type='text/javascript' charset='utf-8'></script>
+    <script src='raphael.js' type='text/javascript' charset='utf-8'></script>
+    <script src='../raphael.implements55.js' type='text/javascript' charset='utf-8'></script>
+    <title>
+      drawing implements for raphael.js
+    </title>
+    <style type="text/css" media="screen">
+      body {font-family: helvetica, arial, sans-serif}
+      #gallery_container { margin: 50px; }
+      #gallery_container .wall-text {
+        float: left;
+        width: 25%;
+        height: 550px;
+      }      ul, li {list-style: none;}
+      a {color: #999;}
+      li {padding: .2em 0;}
+      .wall-text ul li a { display: block; cursor: pointer; }
+      .wall-text ul li a:hover { background: transparent; color: #CCC; }
+      #gallery { float: right; padding: 20px; text-align: center; width: 60%; border: 15px solid #CCC; height: 400px;}  
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="gallery_container">
+        <div class='wall-text'>
+          <h2>
+            drawing implements for raphael.js
+          </h2>
+          <h3>
+            for nonsense only. no promises. poor support
+          </h3>
+          <ul class='menu'>
+            <li>
+              <a href='#circularArc'>circularArc</a>
+            </li>
+            <li>
+              <a href='#spiral'>spiral</a>
+            </li>
+            <li>
+              <a href='#line'>line</a>
+            </li>
+            <li>
+              <a href='#regularPolygon'>regularPolygon</a>
+            </li>
+            <li>
+              <a href='#drawnLine'>drawnLine</a>
+            </li>
+            <li>
+              <a href='#drawnRect'>drawnRect</a>
+            </li>
+            <li>
+              <a href='#drawnCircularArc'>drawnCircularArc</a>
+            </li>
+            <li>
+              <a href='#drawnRegularPolygon'>drawnRegularPolygon</a>
+            </li>
+            <li>
+              <a href='#radialRepeater'>radialRepeater</a>
+            </li>
+            <li>
+              <a href='#grid'>grid</a>
+            </li>
+            <li>
+              <a href='#randomColoredGrid'>randomColoredGrid</a>
+            </li>
+            <li>
+              <a href='#randomColoredObjectGrid'>randomColoredObjectGrid</a>
+            </li>
+            <li>&nbsp;
+            </li>
+            <li>
+              <a href='#fullpaper'>fullpaper</a>
+            </li>
+            <li>
+              <a href='#randomCoordsOnACircle'>randomCoordsOnACircle</a>
+            </li>
+            <li>
+              <a href='#other'>other</a>
+            </li>
+          </ul>
+        </div>      
+        <div id="gallery" class="gallery">
+          <div id="canvas"></div>
+            <div id="pane_circularArc" class="doc-pane" style="">
+                <p>
+                  Attributes are these: (centerX, centerY, radius, startAngle, endAngle)
+                </p>
+              </div>
+              <script type="text/javascript" charset="utf-8">
+                var circularArc = function() {
+              for(var i=0; i < 50; i++) {
+                var point = Raphael.randomCoordsOnACircle(width/2, height/2, 400);
+                paper.circularArc(point.x, point.y, 400, 90+point.angle, 270+point.angle).attr({stroke: randomColor(), "stroke-width": 2});
+              };};
+              </script>
+              <div id="pane_spiral" class="doc-pane" style="display: none; ">
+                <p>
+                  Attributes are: (centerX, centerY, spacing, maxRadius)
+                </p>
+              </div>
+              <script type="text/javascript" charset="utf-8">
+                var spiral = function() {for(var i=0; i < 5; i++) {
+                paper.spiral(200+Raphael.randomize(20),200+Raphael.randomize(20), 5+Ext55.random(5), 1000+Ext55.random(500)).attr({stroke: randomColor()});
+              };};
+              </script>
+              <div id="pane_line" class="doc-pane" style="display: none; ">
+                <p>
+                  Attributes are: (x, y, x2, y2)
+                </p>
+              </div>
+              <script type="text/javascript" charset="utf-8">
+                var line = function() {for(var i=0; i < 100; i++) {
+              var point = Raphael.randomCoordsOnACircle(width/2, height/2, 100+Ext55.random(75));
+              var point2 = Raphael.randomCoordsOnACircle(width/2, height/2, 100+Ext55.random(75));
+              paper.line(point.x, point.y, point2.x, point2.y).attr({stroke: randomColor(), "stroke-width": 2});};};
+              </script>
+              <div id="pane_regularPolygon" class="doc-pane" style="display: none; ">
+                <p>
+                  Attributes are: (centerX, centerY, radius, numberOfSides)
+                </p>
+              </div>
+              <script type="text/javascript" charset="utf-8">
+                var regularPolygon = function() {for(var i=0; i < width+20; i+=20) {
+              for(var j=0; j < height+20; j +=20) {
+              paper.regularPolygon(i, j, 5+Ext55.random(15), Ext55.random(10)+3).attr({stroke: randomColor(), "stroke-width":2, fill: randomColor()});
+            }
+            };};
+              </script>
+              <div id="pane_drawnLine" class="doc-pane" style="display: none; ">
+                <p>
+                  Attributes are these: x, y, x2, y2, wobble
+                </p>
+              </div>
+              <script type="text/javascript" charset="utf-8">
+                var drawnLine = function() {for(var i=0; i < height; i+=5) {
+              paper.drawnLine(0, i, width, i, 0+Ext55.random(i/4)).attr({stroke: "#999"});};};
+              </script>
+              <div id="pane_drawnRect" class="doc-pane" style="display: none; ">
+                <p>
+                  Attributes are these: x, y, width, height, wobble
+                </p>
+              </div>
+              <script type="text/javascript" charset="utf-8">
+                var drawnRect = function() {for(var i=0; i < width-100; i+= 50) {
+              paper.drawnRect(100-i/10, 70-i/10, i, i/2, 0+Ext55.random(i/10)).attr({stroke: "#999"});};};
+              </script>
+              <div id="pane_drawnCircularArc" class="doc-pane" style="display: none; ">
+                <p>
+                  Attributes are: (centerX, centerY, radius, startAngle, endAngle)
+                </p>
+              </div>
+              <script type="text/javascript" charset="utf-8">
+                var drawnCircularArc = function() {for(var i=0; i < 75; i++) {
+              var r = width+Ext55.random(100);
+              var cx = width/2;
+              var endpointY = Ext55.random(height*1.2) - height*0.1;
+              var cy = endpointY - ((width/2) * 1.732);
+              var arc = paper.drawnCircularArc(cx, cy, r, 60, 120).attr({stroke: randomColor(), "stroke-width": 2});
+              if(i%2 == 0) arc.rotate(180, cx, endpointY+(cy+r-endpointY)/2);
+            };};
+              </script>
+              <div id="pane_drawnRegularPolygon" class="doc-pane" style="display: none; ">
+                <p>
+                  Attributes are: (centerX, centerY, radius, numberOfSides, wobblyNess). 10 is a good start for wobblyNess
+                </p>
+              </div>
+              <script type="text/javascript" charset="utf-8">
+                var drawnRegularPolygon = function() {for(var i=0; i < width+20; i+=100) {
+              for(var j=0; j < height+20; j +=100) {
+              paper.drawnRegularPolygon(i, j, 50+Ext55.random(15), Ext55.random(10)+3, 5+Ext55.random(20)).attr({stroke: randomColor(), "stroke-width":1});
+            }
+            };};
+              </script>
+              <div id="pane_radialRepeater" class="doc-pane" style="display: none; ">
+                <p>
+                  Attributes are: (centerX, centerY, radius, repetitions, object, options). Options do nothing. Yay.
+                </p>
+              </div>
+              <script type="text/javascript" charset="utf-8">
+                var radialRepeater = function() {
+            var x = 200, y = 200, r = 80+Ext55.random(40), rr = 90+Ext55.random(50);
+            var starter = paper.rect(10,10,400,50).attr({stroke: randomColor(),"stroke-width": 5});
+            paper.radialRepeater(x,y,r,rr, starter, {});            starter.attr({stroke: randomColor(), "stroke-width": 3});
+            paper.radialRepeater(x,y,r,rr, starter, {});            starter.attr({stroke: randomColor(), "stroke-width": 1});
+            paper.radialRepeater(x,y,r,rr, starter, {});
+            ;};
+              </script>
+              <div id="pane_grid" class="doc-pane" style="display: none; ">
+                <p>
+                  Attributes are: (color, spacingX, spacingY). This just draws lines.
+                </p>
+              </div>
+              <script type="text/javascript" charset="utf-8">
+                var grid = function() {
+              paper.grid(randomColor(), 10+Ext55.random(20), 10+Ext55.random(20));
+              paper.grid(randomColor(), 20+Ext55.random(20), 10+Ext55.random(20));
+              paper.grid(randomColor(), 30+Ext55.random(20), 10+Ext55.random(20));
+              paper.grid(randomColor(), 40+Ext55.random(20), 10+Ext55.random(20));
+              paper.grid(randomColor(), 50+Ext55.random(20), 10+Ext55.random(20));
+            ;};
+              </script>
+              <div id="pane_randomColoredGrid" class="doc-pane" style="display: none; ">
+                <p>
+                  Attributes are: (colors, object, spacing). <br>Ok this is tricky. <br>colors is an array of colors like ['#999999', '#FC0', 'red']. <br>Object is a Raphael object that responds to fill. <br>Spacing is x and y grid spacing.
+                </p>
+              </div>
+              <script type="text/javascript" charset="utf-8">
+                var randomColoredGrid = function() {
+              var shape = paper.rect(-100, -100, 10+Ext55.random(30), 10+Ext55.random(30)).attr({fill: randomColor()});
+              paper.randomColoredGrid(colors, shape, 40);
+            ;};
+              </script>
+              <div id="pane_randomColoredObjectGrid" class="doc-pane" style="display: none; ">
+                <p>
+                  Attributes are: (colors, objects, spacing). <br><br>like the randomColoredGrid
+            <br>objects is an array of Raphael objects that responds to fill
+                </p>
+              </div>
+              <script type="text/javascript" charset="utf-8">
+                var randomColoredObjectGrid = function() {
+              var shapes = [];
+              shapes.push(paper.rect(-100, -100, 10+Ext55.random(30), 10+Ext55.random(30)).attr({stroke: randomColor()}));
+              shapes.push(paper.ellipse(-100, -100, 10+Ext55.random(10), 10+Ext55.random(10)).attr({stroke: randomColor()}));
+              shapes.push(paper.rect(-100, -100, 10+Ext55.random(30), 10+Ext55.random(30)).attr({stroke: randomColor()}));
+              shapes.push(paper.ellipse(-100, -100, 10+Ext55.random(10), 10+Ext55.random(10)).attr({stroke: randomColor()}));
+              paper.randomColoredObjectGrid(colors, shapes, 40);;};
+              </script>              <div id="pane_fullpaper" class="doc-pane" style="display: none; ">
+                <p>
+                  alternative to calling .paper(). returns a paper that fills the whole window.
+                </p>
+              </div>
+              <script type="text/javascript" charset="utf-8">
+                var fullpaper = function() {;};
+              </script>
+              <div id="pane_randomCoordsOnACircle" class="doc-pane" style="display: none; ">
+                <p>
+                  takes: (centerX, centerY, radius). returns: something that responds to .x and .y
+                </p>
+              </div>
+              <script type="text/javascript" charset="utf-8">
+                var randomCoordsOnACircle = function() {for(var i=0; i < 100; i++) {
+              var point = Raphael.randomCoordsOnACircle(width/2, height/2, 100);
+              var point2 = Raphael.randomCoordsOnACircle(width/2, height/2, 100);
+              paper.line(point.x, point.y, point2.x, point2.y).attr({stroke: randomColor(), "stroke-width": 2});};};
+              </script>
+              <div id="pane_other" class="doc-pane" style="display: none; ">
+                <p>
+                  if you feel the need to roll your own, you can look at the source for methods like 'randomize', 'drawnMidpoints',
+            'circularArcString', 'arcString'
+                </p>
+              </div>
+              <script type="text/javascript" charset="utf-8">
+                var other = function() {};
+              </script>
+          </div>
+      </div><!-- gallery_container -->      <script type="text/javascript" charset="utf-8">
+        var paper, width=630, height=300;
+            $(function(){
+              paper = Raphael('canvas', width, height);
+              $('.wall-text ul li a').click(function(){
+                paper.clear();
+                var method = $(this).attr('href').split('#').pop();
+                $(".doc-pane").hide();
+                $('#pane_'+method).show();//effect('appear');
+                eval(method+'()');
+              });
+              $('.menu a').first().click();
+            });            var randomColor = function() {
+              return $(colors).random();
+            };
+            
+            var colors = ['aqua','aquamarine','azure','beige','bisque','black','blanchedalmond','blue','blueviolet','brown','burlywood','cadetblue','chartreuse','chocolate','coral','cornflowerblue','cornsilk','crimson','cyan','darkblue','darkcyan','darkgoldenrod','darkgray','darkgreen','darkkhaki','darkmagenta','darkolivegreen','darkorange','darkorchid','darkred','darksalmon','darkseagreen','darkslateblue','darkslategray','darkturquoise','darkviolet','deeppink','deepskyblue','dimgray','dodgerblue','firebrick','forestgreen','fuchsia','gold','goldenrod','gray','green','greenyellow','honeydew','hotpink','indianred','indigo','khaki','lawngreen','lemonchiffon','lightblue','lightcoral','lightcyan','lightgoldenrodyellow','lightgreen','lightgrey','lightpink','lightsalmon','lightseagreen','lightskyblue','lightslateblue','lightsteelblue','lightyellow','lime','limegreen','linen','magenta','maroon','mediumaquamarine','mediumblue','mediumorchid','mediumpurple','mediumseagreen','mediumslateblue','mediumspringgreen','mediumturquoise','mediumvioletred','midnightblue','navy','olive','olivedrab','orange','orangered','orchid','palegoldenrod','palegreen','paleturquoise','palevioletred','papayawhip','peachpuff','peru','pink','plum','powderblue','purple','red','rosybrown','royalblue','saddlebrown','salmon','sandybrown','seagreen','sienna','silver','skyblue','slateblue','slategray','springgreen','steelblue','tan','teal','thistle','tomato','turquoise','violet','yellow','yellowgreen'];
+      </script>
+    </div>
+  </body>
+</html>
