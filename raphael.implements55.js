@@ -272,19 +272,14 @@ Raphael.fn.radialRepeater = function(centerX, centerY, radius, repetitions, obje
   object.hide();
   var repeaterSet = this.set();
 
+
   for(var angle = 0; angle <= 360; angle+=degrees) {
     var newOne = object.clone();
-
-    var i = {
-      x: (centerX+radius*Math.cos(angle*Math.PI/180)),
-      y: (centerY+radius*Math.sin(angle*Math.PI/180)),
-      rotation: angle
-    };
     newOne.attr({
+      // transform: "r"+angle,
       x: (centerX+radius*Math.cos(angle*Math.PI/180)),
-      y: (centerY+radius*Math.sin(angle*Math.PI/180)),
-      rotation: angle
-    }).show();
+      y: (centerY+radius*Math.sin(angle*Math.PI/180))//,
+    }).rotate(angle).show();
     repeaterSet.push(newOne);
   }
   return repeaterSet;
@@ -301,13 +296,11 @@ Raphael.fn.doToGrid = function(method, spacingX, spacingY, padding) {
 
   for(var y = padding; y <= height-(padding*2); y += spacingY) {
     for(var x = padding; x <= width-(padding*2); x += spacingX) {
-      var element = method.call();
-      element.translate(x,y);
+      var element = method.apply(null, [this]);
+      element.transform("t"+x + " " +y+"...");
     }
   }
-
 };
-
 
 Raphael.fn.grid = function(color, spacingX, spacingY) {
   var height = $(window).height();
